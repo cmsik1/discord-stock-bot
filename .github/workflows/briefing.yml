@@ -1,0 +1,33 @@
+name: Discord Stock Briefing
+
+on:
+  schedule:
+    # 한국 시간(KST) 평일 아침 8시 = UTC 기준 일~목 밤 11시 (23시)
+    # 월(=1) ~ 금(=5) KST 대응을 위해 UTC 요일은 일(=0) ~ 목(=4)
+    - cron: '0 23 * * 0-4'
+  workflow_dispatch: # 수동 실행 버튼 활성화
+
+jobs:
+  briefing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Briefing Script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python main.py

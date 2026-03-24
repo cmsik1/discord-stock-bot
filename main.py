@@ -8,6 +8,9 @@ from scraper import get_us_market_data, get_naver_news
 from analyzer import generate_briefing
 from notifier import send_to_discord_webhook
 
+# 관심 종목 리스트
+interest_stocks = "SK하이닉스, 삼성전자, 현대차, 기아, 두산로보틱스, 한화에어로스페이스, LIG넥스원, 두산에너빌리티"
+
 def main():
     print("[1/3] 데이터 수집 중...")
     market_data = get_us_market_data()
@@ -15,7 +18,7 @@ def main():
 
     print("[2/3] Gemini 브리핑 생성 중...")
     try:
-        briefing = generate_briefing(market_data, news_data)
+        briefing = generate_briefing(market_data, news_data, interest_stocks)
     except Exception as e:
         print(f"[오류] 브리핑 생성 실패: {e}")
         return

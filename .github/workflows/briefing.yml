@@ -2,9 +2,9 @@ name: Discord Stock Briefing
 
 on:
   schedule:
-    # 한국 시간(KST) 평일 아침 8시 = UTC 기준 일~목 밤 11시 (23시)
+    # 한국 시간(KST) 평일 아침 7시 45분 = UTC 기준 일~목 밤 10시 45분 (22:45)
     # 월(=1) ~ 금(=5) KST 대응을 위해 UTC 요일은 일(=0) ~ 목(=4)
-    - cron: '0 23 * * 0-4'
+    - cron: '45 22 * * 0-4'
   workflow_dispatch: # 수동 실행 버튼 활성화
 
 jobs:

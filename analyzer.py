@@ -61,7 +61,7 @@ def generate_briefing(market_data, news_data, interest_stocks, today_date):
 (두 번째 전략/대응)"""
 
     response = gemini_client.models.generate_content(
-        model="gemini-2.5-pro",
+        model="gemini-3.1-pro-preview",
         contents=prompt,
     )
     return response.text

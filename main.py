@@ -1,4 +1,6 @@
 import sys
+import datetime
+import pytz
 
 # Windows 콘솔 인코딩 설정
 sys.stdout.reconfigure(encoding='utf-8')
@@ -15,10 +17,14 @@ def main():
     print("[1/3] 데이터 수집 중...")
     market_data = get_us_market_data()
     news_data = get_naver_news()
-
+ 
+    # 한국 시간 기준 오늘 날짜 구하기
+    now = datetime.datetime.now(pytz.timezone('Asia/Seoul'))
+    today_date = now.strftime('%Y년 %m월 %d일')
+ 
     print("[2/3] Gemini 브리핑 생성 중...")
     try:
-        briefing = generate_briefing(market_data, news_data, interest_stocks)
+        briefing = generate_briefing(market_data, news_data, interest_stocks, today_date)
     except Exception as e:
         print(f"[오류] 브리핑 생성 실패: {e}")
         return

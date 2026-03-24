@@ -10,7 +10,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 # Gemini AI 설정
 gemini_client = genai.Client(api_key=GEMINI_API_KEY)
 
-def generate_briefing(market_data, news_data, interest_stocks):
+def generate_briefing(market_data, news_data, interest_stocks, today_date):
     """수집 데이터를 Gemini에게 보내 마크다운 브리핑을 생성"""
     prompt = f"""당신은 월스트리트의 거시경제 데이터와 여의도의 자금 흐름을 꿰뚫어 보는 20년 차 탑 티어 수석 전략가입니다.
 
@@ -32,6 +32,7 @@ def generate_briefing(market_data, news_data, interest_stocks):
 
 [출력 마크다운 양식]
 
+📅 {today_date} 모닝 브리핑
 📊 Wall Street Overnight
 한줄 요약: (미 증시 핵심 흐름 1줄)
 
@@ -60,7 +61,7 @@ def generate_briefing(market_data, news_data, interest_stocks):
 (두 번째 전략/대응)"""
 
     response = gemini_client.models.generate_content(
-        model="gemini-3.1-pro-preview",
+        model="gemini-2.5-pro",
         contents=prompt,
     )
     return response.text

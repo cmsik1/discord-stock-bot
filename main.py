@@ -11,7 +11,7 @@ from analyzer import generate_briefing
 from notifier import send_to_discord_webhook
 
 # 관심 종목 리스트
-interest_stocks = "SK하이닉스, 삼성전자, 현대차, 기아, 두산로보틱스, 한화에어로스페이스, LIG넥스원, 두산에너빌리티"
+interest_stocks = "SK하이닉스, 삼성전자, 엔비디아"
 
 def main():
     print("[1/3] 데이터 수집 중...")
